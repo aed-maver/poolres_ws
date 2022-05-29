@@ -1,0 +1,30 @@
+{
+  "name": "poolres_ws",
+  "version": "12.18.4",
+  "description": "TEST",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aed-maver/poolres_ws.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aed-maver/poolres_ws/issues"
+  },
+  "homepage": "https://github.com/aed-maver/poolres_ws#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bufferutil": "^4.0.3",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.7",
+    "nodemon": "^2.0.16",
+    "utf-8-validate": "^5.0.5",
+    "ws": "^8.2.1"
+  }
+}
