@@ -45,7 +45,7 @@ wss.on('connection', (ws) => {
     console.log('Client disconnected');
     const itemIndex = users.indexOf(ws);
     let data = { source: `DELETE FROM islogged WHERE isLoggedUserId=${users[itemIndex].id}`};
-    axios.post('http://aedmaver.pl/apiPoolres/api.php', data, {
+    axios.post('https://www.aedmaver.pl/apiPoolres/api.php', data, {
       Headers: {'Content-Type': 'application/json'}
     }).
     then(data => {});
