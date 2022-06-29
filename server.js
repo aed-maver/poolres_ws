@@ -18,8 +18,11 @@ wss.on('connection', (ws) => {
   users.push(ws);
   ws.on('message', (message) => {
 
-      console.log(`Message is: ${message}`);
       message = JSON.parse(message);
+
+      if (message.title !== 'ping') {
+        console.log(`Message is: `, message);
+      }
 
       if(message.title === 'userAddSocket') {
 
@@ -41,8 +44,8 @@ wss.on('connection', (ws) => {
 
   });
   ws.on('close', () => {
-    let url = 'https://www.aedmaver.pl/apiPoolres/api.php';
-    //let url = 'http://localhost:80/apiPoolres/api.php';
+    //let url = 'https://www.aedmaver.pl/apiPoolres/api.php';
+    let url = 'http://localhost:80/apiPoolres/api.php';
     console.log('Client disconnected');
     const itemIndex = users.indexOf(ws);
     let data = { source: `DELETE FROM islogged WHERE isLoggedUserId=${users[itemIndex].id}`};
