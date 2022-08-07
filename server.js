@@ -2,6 +2,7 @@
 const express = require('express');
 const { Server } = require('ws');
 const axios = require('axios');
+var https = require('https');
 
 const PORT = process.env.PORT || 3000;
 const INDEX = '/index.html';
@@ -44,13 +45,17 @@ wss.on('connection', (ws) => {
 
   });
   ws.on('close', () => {
+    let httpsAgent = new https.Agent({
+      checkServerIdentity:() => undefined
+    });
     let url = 'https://www.aedmaver.pl/apiPoolres/api.php';
     //let url = 'http://localhost:80/apiPoolres/api.php';
     console.log('Client disconnected');
     const itemIndex = users.indexOf(ws);
     let data = { source: `DELETE FROM islogged WHERE isLoggedUserId=${users[itemIndex].id}`};
     axios.post(url, data, {
-      Headers: {'Content-Type': 'application/json'}
+      Headers: {'Content-Type': 'application/json'},
+      httpsAgent
     }).
     then(data => {});
     users.splice(itemIndex, 1);
