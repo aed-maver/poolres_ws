@@ -17,6 +17,8 @@ let users = [];
 wss.on('connection', (ws) => {
   console.log('Client connected');
   users.push(ws);
+  ws.send(JSON.stringify({title:'connected', data:''}));
+  
   ws.on('message', (message) => {
 
       message = JSON.parse(message);
@@ -29,14 +31,13 @@ wss.on('connection', (ws) => {
 
         let userIndex = users.indexOf(ws);
         users[userIndex].id = message.data.userId;
-        console.log('users are: ', users);
 
       } else {
 
         wss.clients.forEach(client => {
-
+          
+          //client !== ws && client.readyState === ws.OPEN
           if(client !== ws && client.readyState === ws.OPEN) {
-            //client.send(message.toString());
             client.send(JSON.stringify(message));
           }
 
@@ -59,7 +60,5 @@ wss.on('connection', (ws) => {
     }).
     then(data => {});
     users.splice(itemIndex, 1);
-    //console.log(users); 
-    
   });
 });
